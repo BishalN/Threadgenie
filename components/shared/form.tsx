@@ -1,6 +1,16 @@
+import { useState } from "react";
+
 export function Form() {
+  const [title, setTitle] = useState("");
+  const [style, setStyle] = useState("");
+  const [tweetNumber, setTweetNumber] = useState<undefined | number>();
+  const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
   return (
-    <form className="my-10 space-y-8 divide-y divide-gray-200 rounded-md bg-gray-100 p-4 shadow-md">
+    <form className="my-10 cursor-pointer space-y-8 divide-y divide-gray-200 rounded-lg border-gray-200  bg-white py-4 px-8 shadow-md">
       <div className="space-y-8 divide-y divide-gray-200">
         <div className="pt-8">
           <div>
@@ -24,6 +34,8 @@ export function Form() {
                 <textarea
                   name="title"
                   id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   placeholder="Web development for nubies"
                   autoComplete="title"
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
@@ -41,6 +53,8 @@ export function Form() {
                 <input
                   id="style"
                   name="style"
+                  value={style}
+                  onChange={(e) => setStyle(e.target.value)}
                   placeholder="Humour, Serious, Casual"
                   type="text"
                   autoComplete="style"
@@ -58,6 +72,8 @@ export function Form() {
               <div className="mt-1">
                 <input
                   id="number"
+                  value={tweetNumber}
+                  onChange={(e) => setTweetNumber(+e.target.value)}
                   placeholder="5"
                   name="number"
                   type="number"
