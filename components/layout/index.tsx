@@ -45,7 +45,7 @@ export default function Layout({
               height="30"
               className="mr-2 rounded-sm"
             ></Image>
-            <p>ThreadGenie</p>
+            <p>Threadgenie</p>
           </Link>
           <div>
             <AnimatePresence>

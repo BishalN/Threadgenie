@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-const DOMAIN = "https://precedent.vercel.app";
+const DOMAIN = "https://threadgenie.vercel.app";
 
 export default function Meta({
-  title = "Precedent - Building blocks for your Next.js project",
-  description = "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+  title = "Threadgenie - The Ultimate Tool for Crafting Twitter Threads",
+  description = "Effortlessly Create Engaging and Informative Threads in Minutes",
   image = `${DOMAIN}/api/og`,
 }: {
   title?: string;
