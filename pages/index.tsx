@@ -3,6 +3,7 @@ import Balancer from "react-wrap-balancer";
 import { motion } from "framer-motion";
 import { DEPLOY_URL, FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Github, Twitter } from "@/components/shared/icons";
+import { Form } from "@/components/shared/form";
 
 export default function Home() {
   return (
@@ -85,6 +86,9 @@ export default function Home() {
           </a>
         </motion.div>
       </motion.div>
+      <div className="z-30 h-screen text-4xl text-gray-700">
+        <Form />
+      </div>
     </Layout>
   );
 }
