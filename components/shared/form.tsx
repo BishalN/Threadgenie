@@ -4,10 +4,51 @@ export function Form() {
   const [title, setTitle] = useState("");
   const [style, setStyle] = useState("");
   const [tweetNumber, setTweetNumber] = useState<undefined | number>();
-  const [content, setContent] = useState("");
+  const [twitterThread, setTwitterThread] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const generateThread = async (e: any) => {
+    e.preventDefault();
+    setTwitterThread("");
+    setLoading(true);
+    const response = await fetch("/api/threadgen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        style,
+        tweetNumber,
+      }),
+    });
+    console.log("Edge function returned.");
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
+    }
+
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    let done = false;
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      setTwitterThread((prev) => prev + chunkValue);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <form className="my-10 cursor-pointer space-y-8 divide-y divide-gray-200 rounded-lg border-gray-200  bg-white py-4 px-8 shadow-md">
@@ -89,7 +130,8 @@ export function Form() {
       <div className="pt-5">
         <div className="flex ">
           <button
-            type="submit"
+            type="button"
+            onClick={generateThread}
             className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
           >
             Generate Thread

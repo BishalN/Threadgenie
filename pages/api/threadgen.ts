@@ -25,10 +25,6 @@ if (!process.env.OPENAI_API_KEY) {
   throw new Error("Missing env var from OpenAI");
 }
 
-export const config = {
-  runtime: "edge",
-};
-
 export default async function handler(
   req: ExtendedNextApiRequest,
   res: NextApiResponse<Data>,
@@ -60,7 +56,7 @@ export default async function handler(
   Style → ${style},
   Number of tweets → ${tweetNumber}`;
 
-  const payload: OpenAIStreamPayload = {
+  const payload = {
     model: "text-davinci-003",
     prompt,
     temperature: 0.7,
@@ -68,10 +64,22 @@ export default async function handler(
     frequency_penalty: 0,
     presence_penalty: 0,
     max_tokens: 3400,
-    stream: true,
     n: 1,
   };
 
-  const stream = await OpenAIStream(payload);
-  return new Response(stream);
+  const result = await fetch("https://api.openai.com/v1/completions", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ""}`,
+    },
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+  const json = await result.json();
+
+  console.log(json);
+  const text = json.choices[0].text;
+  // return text
+  res.status(200).json(text);
 }
