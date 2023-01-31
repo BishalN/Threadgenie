@@ -58,7 +58,8 @@ export function Form() {
   };
 
   const parsedThread = useMemo(() => {
-    return twitterThread.split("\n").filter((tweet) => tweet !== "");
+    // split the thread into an array of tweets and filter out empty tweets
+    return twitterThread.split("\n").filter((tweet) => tweet !== "" && tweet);
   }, [twitterThread]);
 
   return (
