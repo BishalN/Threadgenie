@@ -52,9 +52,11 @@ export default async function handler(
     return new Response("All fields are required", { status: 400 });
   }
 
-  const prompt = `Write me a twitter thread on Topic → ${title},
-  Style → ${style},
-  Number of tweets → ${tweetNumber}`;
+  const prompt = `Write me a twitter thread on Topic ${title},Style ${style}Number of tweets ${tweetNumber} example:
+  Tweet 1: "..."
+  Tweet 2: "..."
+  Tweet 3: "..."
+  `;
 
   const payload = {
     model: "text-davinci-003",
@@ -80,5 +82,6 @@ export default async function handler(
 
   const text = json.choices[0].text;
   // return text
+  console.log(text);
   res.status(200).json(text);
 }

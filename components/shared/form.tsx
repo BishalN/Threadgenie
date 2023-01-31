@@ -7,8 +7,6 @@ export function Form() {
   const [tweetNumber, setTweetNumber] = useState<undefined | number>();
   const [twitterThread, setTwitterThread] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const generateThread = async (e: any) => {
     e.preventDefault();
@@ -31,13 +29,14 @@ export function Form() {
     // reset all the fields
     setTitle("");
     setStyle("");
-    setTweetNumber(undefined);
+    setTweetNumber(0);
   };
-
-  console.log(twitterThread);
 
   const parsedThread = useMemo(() => {
     // split the string from new line characters and filter out empty strings
+    //   Tweet 1: "..."
+    // Tweet 2: "..."
+    // Tweet 3: "..."
     return twitterThread.split("\n").filter((tweet) => tweet !== "");
   }, [twitterThread]);
 
@@ -140,10 +139,10 @@ export function Form() {
           {parsedThread.map((tweet, index) => (
             <div
               key={index}
-              className="my-4 flex rounded-lg border-2 border-gray-400 bg-gray-300 p-4 text-sm shadow-lg"
+              className="my-4 flex justify-between rounded-lg bg-gray-600 p-4 text-sm shadow-md"
             >
-              <p className="text-gray-700">{tweet}</p>
-              <CopyButton value={tweet} />
+              <p className="text-gray-200">{tweet}</p>
+              <CopyButton value={tweet.split(":")[1]} />
             </div>
           ))}
         </div>
