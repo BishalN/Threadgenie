@@ -1,5 +1,8 @@
 import { useMemo, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
 import { CopyButton } from "../copy-button";
+import LoadingDots from "../loading-dots";
 
 export function Form() {
   const [title, setTitle] = useState("");
@@ -11,37 +14,44 @@ export function Form() {
   const generateThread = async (e: any) => {
     e.preventDefault();
     setTwitterThread("");
+    // check if all fields are filled
+    if (!title || !style || !tweetNumber) {
+      toast.error("Please fill all the fields");
+      return;
+    }
     setLoading(true);
-    const response = await fetch("/api/threadgen", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        style,
-        tweetNumber,
-      }),
-    });
-    const data = await response.json();
-    setTwitterThread(data);
-    setLoading(false);
-    // reset all the fields
-    setTitle("");
-    setStyle("");
-    setTweetNumber(0);
+    try {
+      const response = await fetch("/api/threadgen", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          style,
+          tweetNumber,
+        }),
+      });
+      const data = await response.json();
+      setTwitterThread(data);
+      setLoading(false);
+      // reset all the fields
+      setTitle("");
+      setStyle("");
+      setTweetNumber(0);
+    } catch (error) {
+      setLoading(false);
+      toast.error("Something went wrong");
+    }
   };
 
   const parsedThread = useMemo(() => {
-    // split the string from new line characters and filter out empty strings
-    //   Tweet 1: "..."
-    // Tweet 2: "..."
-    // Tweet 3: "..."
     return twitterThread.split("\n").filter((tweet) => tweet !== "");
   }, [twitterThread]);
 
   return (
     <div className="my-10 max-w-2xl cursor-pointer space-y-8 divide-y divide-gray-200 rounded-lg  border-gray-200 bg-white py-4 px-8 shadow-md">
+      <Toaster />
       <form>
         <div className="space-y-8 divide-y divide-gray-200">
           <div className="pt-8">
@@ -126,7 +136,11 @@ export function Form() {
               disabled={loading}
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
-              {loading ? "Loading..." : "Generate Thread"}
+              {loading ? (
+                <LoadingDots color="white" style="large" />
+              ) : (
+                "Generate Thread"
+              )}
             </button>
           </div>
         </div>
