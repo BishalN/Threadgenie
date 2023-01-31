@@ -15,8 +15,18 @@ export function Form() {
     e.preventDefault();
     setTwitterThread("");
     // check if all fields are filled
-    if (!title || !style || !tweetNumber) {
+    if (!title || !tweetNumber) {
       toast.error("Please fill all the fields");
+      return;
+    }
+    // check if the title is less than 3 characters long
+    if (title.length < 3) {
+      toast.error("Title must be at least 3 characters long");
+      return;
+    }
+    // check if the tweet number is less than 2 or greater than 10
+    if (tweetNumber < 2 || tweetNumber > 10) {
+      toast.error("Tweet number must be between 2 and 10");
       return;
     }
     setLoading(true);
@@ -51,7 +61,6 @@ export function Form() {
 
   return (
     <div className="my-10 max-w-2xl cursor-pointer space-y-8 divide-y divide-gray-200 rounded-lg  border-gray-200 bg-white py-4 px-8 shadow-md">
-      <Toaster />
       <form>
         <div className="space-y-8 divide-y divide-gray-200">
           <div className="pt-8">
@@ -137,7 +146,9 @@ export function Form() {
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               {loading ? (
-                <LoadingDots color="white" style="large" />
+                <span className="pt-4">
+                  <LoadingDots color="white" style="large" />
+                </span>
               ) : (
                 "Generate Thread"
               )}

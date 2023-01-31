@@ -4,10 +4,13 @@ import { motion } from "framer-motion";
 import { DEPLOY_URL, FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Github, Twitter } from "@/components/shared/icons";
 import { Form } from "@/components/shared/form";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   return (
     <Layout>
+      <Toaster />
+
       <motion.div
         className="max-w-xl px-5 xl:px-0"
         initial="hidden"
