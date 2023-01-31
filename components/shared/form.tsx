@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 import { CopyButton } from "../copy-button";
-import LoadingDots from "../loading-dots";
 import { motion } from "framer-motion";
 import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
+import LoadingDots from "./icons/loading-dots";
 
 export function Form() {
   const [title, setTitle] = useState("");
@@ -153,7 +153,7 @@ export function Form() {
             >
               {loading ? (
                 <span className="px-4">
-                  <LoadingDots color="white" style="large" />
+                  <LoadingDots color="white" />
                 </span>
               ) : (
                 "Generate Thread"
