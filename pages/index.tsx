@@ -88,10 +88,8 @@ export default function Home() {
             <p>Star on GitHub</p>
           </a>
         </motion.div>
-      </motion.div>
-      <div className="z-30 h-screen text-4xl text-gray-700">
         <Form />
-      </div>
+      </motion.div>
     </Layout>
   );
 }

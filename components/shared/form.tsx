@@ -3,6 +3,8 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { CopyButton } from "../copy-button";
 import LoadingDots from "../loading-dots";
+import { motion } from "framer-motion";
+import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 
 export function Form() {
   const [title, setTitle] = useState("");
@@ -60,7 +62,10 @@ export function Form() {
   }, [twitterThread]);
 
   return (
-    <div className="my-10 max-w-2xl cursor-pointer space-y-8 divide-y divide-gray-200 rounded-lg  border-gray-200 bg-white py-4 px-8 shadow-md">
+    <motion.div
+      variants={FADE_DOWN_ANIMATION_VARIANTS}
+      className="my-10 max-w-2xl cursor-pointer space-y-8 divide-y divide-gray-200 rounded-lg  border-gray-200 bg-white py-4 px-8 shadow-md"
+    >
       <form>
         <div className="space-y-8 divide-y divide-gray-200">
           <div className="pt-8">
@@ -146,7 +151,7 @@ export function Form() {
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               {loading ? (
-                <span className="pt-4">
+                <span className="px-4">
                   <LoadingDots color="white" style="large" />
                 </span>
               ) : (
@@ -170,8 +175,16 @@ export function Form() {
               <CopyButton value={tweet.split(":")[1]} />
             </div>
           ))}
+          {/* <a
+            target="_blank"
+            href={`https://twitter.com/intent/tweet?text=${parsedThread[0]}`}
+            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            rel="noreferrer"
+          >
+            Tweet It Now
+          </a> */}
         </div>
       ) : null}
-    </div>
+    </motion.div>
   );
 }
