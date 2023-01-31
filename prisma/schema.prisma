@@ -51,3 +51,19 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Tweet {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  text      String
+  threadId  String
+  thread    Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
+}
+
+model Thread {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tweets    Tweet[]
+}

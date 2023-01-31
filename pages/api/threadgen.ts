@@ -78,7 +78,6 @@ export default async function handler(
 
   const json = await result.json();
 
-  console.log(json);
   const text = json.choices[0].text;
   // return text
   res.status(200).json(text);
