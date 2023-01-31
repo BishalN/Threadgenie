@@ -2,7 +2,6 @@ import { Ratelimit } from "@upstash/ratelimit";
 import type { NextApiRequest, NextApiResponse } from "next";
 import requestIp from "request-ip";
 import redis from "../../utils/redis";
-import { OpenAIStreamPayload, OpenAIStream } from "utils/OpenAIStream";
 
 type Data = string;
 interface ExtendedNextApiRequest extends NextApiRequest {
