@@ -8,7 +8,7 @@ import LoadingDots from "./icons/loading-dots";
 
 export function Form() {
   const [title, setTitle] = useState("");
-  const [style, setStyle] = useState("");
+  const [style, setStyle] = useState("funny");
   const [tweetNumber, setTweetNumber] = useState<undefined | number>();
   const [twitterThread, setTwitterThread] = useState("");
   const [loading, setLoading] = useState(false);
