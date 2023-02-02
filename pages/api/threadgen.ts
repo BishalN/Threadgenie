@@ -81,13 +81,5 @@ export default async function handler(
 
   const text = json.choices[0].text;
   // return text
-  console.log(text);
-  // update the thread count key in redis
-  if (redis) {
-    // only sets the value if it doesn't exist set if not exists
-    await redis.setnx("threadCount", 0);
-    await redis.incr("threadCount");
-  }
-
   res.status(200).json(text);
 }
