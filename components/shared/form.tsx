@@ -114,10 +114,10 @@ export function Form() {
                     onChange={(e) => setStyle(e.target.value)}
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
                   >
-                    <option value="humour">Humour</option>
-                    <option value="serious">Serious</option>
+                    <option value="funny">Funny</option>
                     <option value="casual">Casual</option>
                     <option value="explainer">Explainer</option>
+                    <option value="serious">Serious</option>
                   </select>
                 </div>
               </div>
