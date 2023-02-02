@@ -5,12 +5,32 @@ import { DEPLOY_URL, FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Github, Twitter } from "@/components/shared/icons";
 import { Form } from "@/components/shared/form";
 import { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  // const [threadCount, setThreadCount] = useState(0);
+
+  // useEffect(() => {
+  //   getThreadCount();
+  // }, []);
+
+  // const getThreadCount = async () => {
+  //   try {
+  //     const response = await fetch("/api/threadCount", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     setThreadCount(data.threadCount || 0);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <Layout>
       <Toaster />
-
       <motion.div
         className="max-w-xl px-5 xl:px-0"
         initial="hidden"
@@ -52,6 +72,12 @@ export default function Home() {
             Effortlessly Create Engaging and Informative Threads in Minutes
           </Balancer>
         </motion.p>
+        {/* <motion.p
+          className="mt-3 text-center text-sm text-gray-500 "
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+        >
+          <Balancer>{threadCount} threads generated and counting</Balancer>
+        </motion.p> */}
         <motion.div
           className="mx-auto mt-6 flex items-center justify-center space-x-5"
           variants={FADE_DOWN_ANIMATION_VARIANTS}

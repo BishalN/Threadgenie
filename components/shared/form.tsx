@@ -107,16 +107,18 @@ export function Form() {
                   Style
                 </label>
                 <div className="mt-1">
-                  <input
-                    id="style"
+                  <select
                     name="style"
+                    id="style"
                     value={style}
                     onChange={(e) => setStyle(e.target.value)}
-                    placeholder="Humour, Serious, Casual"
-                    type="text"
-                    autoComplete="style"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
-                  />
+                  >
+                    <option value="humour">Humour</option>
+                    <option value="serious">Serious</option>
+                    <option value="casual">Casual</option>
+                    <option value="explainer">Explainer</option>
+                  </select>
                 </div>
               </div>
               <div className="sm:col-span-6">
