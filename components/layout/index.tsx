@@ -22,7 +22,7 @@ export default function Layout({
   return (
     <>
       <Meta {...meta} />
-      <div className="fixed h-screen w-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+      <div className="fixed h-screen w-screen bg-gradient-to-br from-blue-50 via-gray-50 to-indigo-100" />
       <div
         className={`fixed top-0 w-full ${
           scrolled

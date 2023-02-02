@@ -2,7 +2,7 @@
 
 ThreadGenie helps users generate Twitter threads in minutes. With just a few clicks, you can create a well-structured and engaging Twitter thread that will captivate your audience.
 
-## Tech Stack + Features
+## Tech Stack
 
 ### Frameworks
 
