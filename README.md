@@ -17,7 +17,3 @@ ThreadGenie helps users generate Twitter threads in minutes. With just a few cli
 ### Credits
 
 The template used for this project was made by [Steven Tey](https://twitter.com/steventey). ThreadGenie was inspired by [nutlope](https://twitter.com/nutlope) TwitterBio and the Restorephotos project.
-
-#### Contact
-
-For any questions or feedback, please reach out to us at support@threadgenie.com. We'd love to hear from you!
