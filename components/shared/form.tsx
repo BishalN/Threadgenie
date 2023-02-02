@@ -57,9 +57,69 @@ export function Form() {
     }
   };
 
+  const edgeGenerateThread = async (e: any) => {
+    e.preventDefault();
+    setTwitterThread("");
+    // check if all fields are filled
+    if (!title || !tweetNumber) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+    // check if the title is less than 3 characters long
+    if (title.length < 3) {
+      toast.error("Title must be at least 3 characters long");
+      return;
+    }
+    // check if the tweet number is less than 2 or greater than 10
+    if (tweetNumber < 2 || tweetNumber > 15) {
+      toast.error("Tweet number must be between 2 and 15");
+      return;
+    }
+    setLoading(true);
+    const response = await fetch("/api/edgethreadgen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        style,
+        tweetNumber,
+      }),
+    });
+    console.log("Edge function returned.");
+
+    if (!response.ok) {
+      setLoading(false);
+      toast.error("Something went wrong");
+      return;
+    }
+
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
+    }
+
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    let done = false;
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      setTwitterThread((prev) => prev + chunkValue);
+    }
+
+    setLoading(false);
+  };
+
   const parsedThread = useMemo(() => {
     // split the thread into an array of tweets and filter out empty tweets
-    return twitterThread.split("\n").filter((tweet) => tweet !== "" && tweet);
+    return twitterThread
+      .split("\n")
+      .filter((tweet) => tweet !== "" && !!tweet && tweet.length > 0);
   }, [twitterThread]);
 
   return (
@@ -149,7 +209,7 @@ export function Form() {
           <div className="flex ">
             <button
               type="button"
-              onClick={generateThread}
+              onClick={edgeGenerateThread}
               disabled={loading}
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
