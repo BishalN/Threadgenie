@@ -5,7 +5,6 @@ import { DEPLOY_URL, FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Github, Twitter } from "@/components/shared/icons";
 import { Form } from "@/components/shared/form";
 import { Toaster } from "react-hot-toast";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   // const [threadCount, setThreadCount] = useState(0);
