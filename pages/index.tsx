@@ -37,6 +37,7 @@ export default function Home() {
             Introducing Threadgenie
           </p>
         </motion.a>
+
         <motion.h1
           className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
@@ -87,6 +88,21 @@ export default function Home() {
             <p>Star on GitHub</p>
           </a>
         </motion.div>
+        <motion.a
+          variants={FADE_DOWN_ANIMATION_VARIANTS}
+          href="https://www.producthunt.com/posts/threadgenie?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-threadgenie"
+          target="_blank"
+          rel="noreferrer"
+          className="mx-auto my-5 flex max-w-fit items-center justify-center"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=377660&theme=neutral"
+            alt="ThreadGenie - The ultimate tool for crafting twitter threads | Product Hunt"
+            style={{ width: 250, height: 54 }}
+            width={250}
+            height={54}
+          />
+        </motion.a>
         <Form />
       </motion.div>
     </Layout>
